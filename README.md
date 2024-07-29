@@ -7,5 +7,6 @@ Solutions for *some* exercices of the [*The Go Programming Language*][gopl] book
   - 6.3
   - 6.4
   - 6.5
+  - 7.1
 
 [gopl]: https://www.gopl.io/
