@@ -3,6 +3,7 @@ package main
 import (
 	"bufio"
 	"fmt"
+	"io"
 )
 
 // Let's allow potential word overlap between two consecutive
@@ -21,7 +22,7 @@ type LineCounter struct {
 // « The Go compiler does not support accessing a struct field
 // x.f where x is of type parameter type even if all types in
 // the type parameter's type set have a field f. We may remove
-// this restriction in a future release.
+// this restriction in a future release. »
 //
 // Generics aren't covered by gopl anyway; this also means
 // we can't use a generic doWrite that access our Counter's fields.
@@ -76,12 +77,30 @@ func (c *LineCounter) Write(p []byte) (int, error) {
 	return doWrite(c, p, bufio.ScanLines)
 }
 
+type ByteCounterWrapper struct {
+	w io.Writer
+	n int64
+}
+
+func (cw *ByteCounterWrapper) Write(p []byte) (int, error) {
+	n, err := cw.w.Write(p)
+	cw.n += int64(n)
+	return n, err
+}
+
+func CountingWriter(w io.Writer) (io.Writer, *int64) {
+	cw := &ByteCounterWrapper{w, 0}
+	return cw, &cw.n
+}
+
 func main() {
-	c := &WordCounter{0,make([]byte,0)}
+
+	c, n := CountingWriter(&WordCounter{0,make([]byte,0)})
 
 	c.Write([]byte("hello, world"))
 
-	fmt.Printf("Counter: %d\n", c.n)
+	fmt.Printf("Counter: %d\n", *n)
 	c.Write([]byte(" "))
-	fmt.Printf("Counter: %d\n", c.n)
+	fmt.Printf("Counter: %d\n", *n)
+
 }

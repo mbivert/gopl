@@ -2,6 +2,7 @@ package main
 
 import (
 	"testing"
+	"fmt"
 )
 
 func TestWordCounter(t *testing.T) {
@@ -76,5 +77,24 @@ func TestLineCounter(t *testing.T) {
 
 	if c.n != 1 {
 		t.Errorf("One first line")
+	}
+}
+
+func TestCountingWriter(t *testing.T) {
+	c, n := CountingWriter(&WordCounter{0,make([]byte,0)})
+
+	// Haven't tested this before here actually (used as an io.Writer)
+	fmt.Fprintf(c, "hello, world")
+
+	if *n != int64(len("hello, ")) {
+		t.Errorf("We should have counted %d bytes (`hello, `); have %d",
+			len("hello "), *n)
+	}
+
+	c.Write([]byte(" "))
+
+	if *n != int64(len("hello, world ")) {
+		t.Errorf("We should have counted %d bytes (`hello, `); have %d",
+			len("hello, world "), *n)
 	}
 }
