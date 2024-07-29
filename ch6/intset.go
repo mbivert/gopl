@@ -5,21 +5,26 @@ import (
 	"fmt"
 )
 
+const (
+	// Magic spell.
+	intLen = 32 << (^uint(0) >> 63)
+)
+
 // i-th bit set <=> i is in the set.
 // (words is to be understood (accessed) as a "flat",
 // "endless" bit array)
 type IntSet struct {
-	words []uint64
+	words []uint
 }
 
 func (s *IntSet) Has(x int) bool {
 	// word index, bit index
-	word, bit := x/64, uint(x%64)
+	word, bit := x/intLen, uint(x%intLen)
 	return word < len(s.words) && s.words[word]&(1<<bit) != 0
 }
 
 func (s *IntSet) Add(x int) {
-	word, bit := x/64, uint(x%64)
+	word, bit := x/intLen, uint(x%intLen)
 	for word >= len(s.words) {
 		s.words = append(s.words, 0)
 	}
@@ -42,13 +47,13 @@ func (s *IntSet) String() string {
 	buf.WriteByte('{')
 
 	for i, word := range(s.words) {
-		for j := 0; j < 64; j++ {
+		for j := 0; j < intLen; j++ {
 			if word & (1<<j) != 0 {
 				// We're beyond the opening {
 				if buf.Len() > 1 {
 					buf.WriteByte(' ')
 				}
-				fmt.Fprintf(&buf, "%d", i*64+j)
+				fmt.Fprintf(&buf, "%d", i*intLen+j)
 			}
 		}
 	}
@@ -62,7 +67,7 @@ func (s *IntSet) Len() int {
 	n := 0
 
 	for _, word := range s.words {
-		for j := 0; j < 64; j++ {
+		for j := 0; j < intLen; j++ {
 			if word & (1<<j) != 0 {
 				n++
 			}
@@ -72,7 +77,7 @@ func (s *IntSet) Len() int {
 }
 
 func (s *IntSet) Remove(x int) {
-	word, bit := x/64, x%64
+	word, bit := x/intLen, x%intLen
 	// not here for sure
 	if word >= len(s.words) {
 		return
@@ -83,11 +88,11 @@ func (s *IntSet) Remove(x int) {
 }
 
 func (s *IntSet) Clear() {
-	s.words = make([]uint64, 0)
+	s.words = make([]uint, 0)
 }
 
 func (s *IntSet) Copy() *IntSet {
-	t := &IntSet{make([]uint64, len(s.words))}
+	t := &IntSet{make([]uint, len(s.words))}
 	for i := range s.words {
 		t.words[i] = s.words[i]
 	}
@@ -104,9 +109,9 @@ func (s *IntSet) Elems() []int {
 	ns := make([]int, 0)
 
 	for i, word := range(s.words) {
-		for j := 0; j < 64; j++ {
+		for j := 0; j < intLen; j++ {
 			if word & (1<<j) != 0 {
-				ns = append(ns, i*64+j)
+				ns = append(ns, i*intLen+j)
 			}
 		}
 	}
@@ -147,9 +152,10 @@ func (s *IntSet) SymmetricDifferenceWith(t *IntSet) {
 }
 
 func main() {
-	s := &IntSet{make([]uint64, 0)}
+	s := &IntSet{make([]uint, 0)}
 
 	s.AddAll(5, 19, 42, 1999110232)
 
 	fmt.Println(s.String())
+	fmt.Println(intLen)
 }

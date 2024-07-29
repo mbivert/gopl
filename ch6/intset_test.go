@@ -6,7 +6,7 @@ import (
 )
 
 func TestLen(t *testing.T) {
-	s := &IntSet{make([]uint64, 0)}
+	s := &IntSet{make([]uint, 0)}
 
 	if s.Len() != 0 {
 		t.Errorf("Len({}) != 0")
@@ -26,7 +26,7 @@ func TestLen(t *testing.T) {
 }
 
 func TestRemove(t *testing.T) {
-	s := &IntSet{make([]uint64, 0)}
+	s := &IntSet{make([]uint, 0)}
 
 	s.Remove(0)
 
@@ -60,7 +60,7 @@ func TestRemove(t *testing.T) {
 }
 
 func TestClear(t *testing.T) {
-	s := &IntSet{make([]uint64, 0)}
+	s := &IntSet{make([]uint, 0)}
 
 	s.AddAll(5, 99, 1024)
 
@@ -76,7 +76,7 @@ func TestClear(t *testing.T) {
 }
 
 func TestCopy(t *testing.T) {
-	s := &IntSet{make([]uint64, 0)}
+	s := &IntSet{make([]uint, 0)}
 
 	s.AddAll(5, 99, 1024)
 
@@ -103,7 +103,7 @@ func TestCopy(t *testing.T) {
 
 // NOTE: AddAll is indirectly tested here and there
 func TestAddAllElems(t *testing.T) {
-	s := &IntSet{make([]uint64, 0)}
+	s := &IntSet{make([]uint, 0)}
 
 	ns := []int{1, 2, 10, 98}
 	s.AddAll(ns...)
@@ -115,7 +115,7 @@ func TestAddAllElems(t *testing.T) {
 }
 
 func TestIntersectWith(t *testing.T) {
-	s := &IntSet{make([]uint64, 0)}
+	s := &IntSet{make([]uint, 0)}
 	s.AddAll(1, 42, 18, 67, 910)
 
 	s0 := s.String()
@@ -125,7 +125,7 @@ func TestIntersectWith(t *testing.T) {
 		t.Errorf("Intersection with self shouldn't change anything")
 	}
 
-	x := &IntSet{make([]uint64, 0)}
+	x := &IntSet{make([]uint, 0)}
 	x.AddAll(1, 42, 11, 912)
 
 	s.IntersectWith(x)
@@ -136,7 +136,7 @@ func TestIntersectWith(t *testing.T) {
 }
 
 func TestDifferenceWith(t *testing.T) {
-	s := &IntSet{make([]uint64, 0)}
+	s := &IntSet{make([]uint, 0)}
 	s.AddAll(1, 42, 18, 67, 910)
 
 	s.DifferenceWith(s)
@@ -147,7 +147,7 @@ func TestDifferenceWith(t *testing.T) {
 
 	s.AddAll(1, 42, 18, 67, 910)
 
-	x := &IntSet{make([]uint64, 0)}
+	x := &IntSet{make([]uint, 0)}
 	x.AddAll(1, 42, 11, 912)
 
 	s.DifferenceWith(x)
@@ -159,7 +159,7 @@ func TestDifferenceWith(t *testing.T) {
 }
 
 func TestSymmetricDifferenceWith(t *testing.T) {
-	s := &IntSet{make([]uint64, 0)}
+	s := &IntSet{make([]uint, 0)}
 	s.AddAll(1, 42, 18, 67, 910)
 
 	s.SymmetricDifferenceWith(s)
@@ -170,7 +170,7 @@ func TestSymmetricDifferenceWith(t *testing.T) {
 
 	s.AddAll(1, 42, 18, 67, 910)
 
-	x := &IntSet{make([]uint64, 0)}
+	x := &IntSet{make([]uint, 0)}
 	x.AddAll(1, 42, 11, 912, 1024)
 
 	s.SymmetricDifferenceWith(x)
