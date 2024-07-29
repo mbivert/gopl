@@ -14,6 +14,9 @@ Solutions for *some* exercices of the [*The Go Programming Language*][gopl] book
     - 7.2
   - [ch7/tree.go][gh-mb-gopl-ch7/tree.go], [ch7/tree_test.go][gh-mb-gopl-ch7/tree_test.go]:
     - 7.3
+  - [ch8/clockwall.go][gh-mb-gopl-ch8/clockwall.go];
+  [ch8/launch-clocks.sh][gh-mb-gopl-ch8/launch-clocks.sh]
+    - 8.1
 
 **<u>Quick book review:</u>** The books feels great; in particular:
 
@@ -38,7 +41,7 @@ Eventually:
 	p204: subtle bits regarding interfaces containing a nil pointer;
 	would be nice to clarify all those things with proper "memory diagrams".
 
-	8.1 / 8.2 : p241
+	8.2 : p241
 -->
 
 [gopl]: https://www.gopl.io/
@@ -51,3 +54,6 @@ Eventually:
 
 [gh-mb-gopl-ch7/tree.go]: https://github.com/mbivert/gopl/blob/master/ch7/tree.go
 [gh-mb-gopl-ch7/tree_test.go]: https://github.com/mbivert/gopl/blob/master/ch7/tree_test.go
+
+[gh-mb-gopl-ch8/clockwall.go]: https://github.com/mbivert/gopl/blob/master/ch8/clockwall.go
+[gh-mb-gopl-ch8/launch-clocks.sh]: https://github.com/mbivert/gopl/blob/master/ch8/launch-clocks.sh
