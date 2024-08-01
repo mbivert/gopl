@@ -17,6 +17,8 @@ Solutions for *some* exercices of the [*The Go Programming Language*][gopl] book
   - [ch8/clockwall.go][gh-mb-gopl-ch8/clockwall.go];
   [ch8/launch-clocks.sh][gh-mb-gopl-ch8/launch-clocks.sh]
     - 8.1
+  - [ch8/ftpd.go][gh-mb-gopl-ch8/ftpd.go];
+    - 8.2
 
 **<u>Quick book review:</u>** The books feels great; in particular:
 
@@ -57,3 +59,5 @@ Eventually:
 
 [gh-mb-gopl-ch8/clockwall.go]: https://github.com/mbivert/gopl/blob/master/ch8/clockwall.go
 [gh-mb-gopl-ch8/launch-clocks.sh]: https://github.com/mbivert/gopl/blob/master/ch8/launch-clocks.sh
+
+[gh-mb-gopl-ch8/ftpd.go]: https://github.com/mbivert/gopl/blob/master/ch8/ftpd.go
