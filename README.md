@@ -14,11 +14,14 @@ Solutions for *some* exercices of the [*The Go Programming Language*][gopl] book
     - 7.2
   - [ch7/tree.go][gh-mb-gopl-ch7/tree.go], [ch7/tree_test.go][gh-mb-gopl-ch7/tree_test.go]:
     - 7.3
-  - [ch8/clockwall.go][gh-mb-gopl-ch8/clockwall.go];
-  [ch8/launch-clocks.sh][gh-mb-gopl-ch8/launch-clocks.sh]
+  - [ch8/clockwall.go][gh-mb-gopl-ch8/clockwall.go],
+  [ch8/launch-clocks.sh][gh-mb-gopl-ch8/launch-clocks.sh]:
     - 8.1
-  - [ch8/ftpd.go][gh-mb-gopl-ch8/ftpd.go];
+  - [ch8/ftpd.go][gh-mb-gopl-ch8/ftpd.go]:
     - 8.2
+  - [ch8/netcat3.go][gh-mb-gopl-ch8/netcat3.go],
+   [ch8/reverb1.go][gh-mb-gopl-ch8/reverb1.go]:
+    - 8.3
 
 **<u>Quick book review:</u>** The books feels great; in particular:
 
@@ -42,8 +45,6 @@ Eventually:
 
 	p204: subtle bits regarding interfaces containing a nil pointer;
 	would be nice to clarify all those things with proper "memory diagrams".
-
-	8.2 : p241
 -->
 
 [gopl]: https://www.gopl.io/
@@ -61,3 +62,6 @@ Eventually:
 [gh-mb-gopl-ch8/launch-clocks.sh]: https://github.com/mbivert/gopl/blob/master/ch8/launch-clocks.sh
 
 [gh-mb-gopl-ch8/ftpd.go]: https://github.com/mbivert/gopl/blob/master/ch8/ftpd.go
+
+[gh-mb-gopl-ch8/netcat3.go]: https://github.com/mbivert/gopl/blob/master/ch8/netcat3.go
+[gh-mb-gopl-ch8/reverb1.go]: https://github.com/mbivert/gopl/blob/master/ch8/reverb1.go
