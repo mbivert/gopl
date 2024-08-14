@@ -22,8 +22,10 @@ Solutions for *some* exercices of the [*The Go Programming Language*][gopl] book
   - [ch8/netcat3.go][gh-mb-gopl-ch8/netcat3.go],
    [ch8/reverb1.go][gh-mb-gopl-ch8/reverb1.go]:
     - 8.3
+  - [ch8/reverb2.go][gh-mb-gopl-ch8/reverb2.go]:
+    - 8.4
 
-**<u>Quick book review:</u>** The books feels great; in particular:
+*<u>Quick book review:</u>** The books feels great; in particular:
 
   - interesting exercises, close to real-world, varied (e.g.
   Exercise 8.2: implementing a concurrent FTP server);
@@ -65,3 +67,5 @@ Eventually:
 
 [gh-mb-gopl-ch8/netcat3.go]: https://github.com/mbivert/gopl/blob/master/ch8/netcat3.go
 [gh-mb-gopl-ch8/reverb1.go]: https://github.com/mbivert/gopl/blob/master/ch8/reverb1.go
+
+[gh-mb-gopl-ch8/reverb2.go]: https://github.com/mbivert/gopl/blob/master/ch8/reverb2.go
