@@ -30,6 +30,8 @@ Solutions for *some* exercices of the [*The Go Programming Language*][gopl] book
     - 8.7
   - [ch8/reverb2-with-timeout.go][gh-mb-gopl-ch8/reverb2-with-timeout.go]:
     - 8.8
+  - [ch8/du.go][gh-mb-gopl-ch8/du.go]
+    - 8.9
 
 *<u>Quick book review:</u>** The books feels great; in particular:
 
@@ -80,5 +82,7 @@ Eventually:
 
 [gh-mb-gopl-ch8/mirror.go]: https://github.com/mbivert/gopl/blob/master/ch8/mirror.go
 
-[gh-mb-gopl-ch8/reverb2-with-timeout.go]:https://github.com/mbivert/gopl/blob/master/ch8/reverb2-with-timeout.go
+[gh-mb-gopl-ch8/reverb2-with-timeout.go]: https://github.com/mbivert/gopl/blob/master/ch8/reverb2-with-timeout.go
+
+[gh-mb-gopl-ch8/du.go]: https://github.com/mbivert/gopl/blob/master/ch8/du.go
 

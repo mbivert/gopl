@@ -25,7 +25,7 @@ func handleConn(c net.Conn) {
 	input := bufio.NewScanner(c)
 	var wg sync.WaitGroup
 
-	ticker := time.NewTicker(1*time.Second)
+	ticker := time.NewTicker(1 * time.Second)
 
 	// Wait in the background for clients to send
 	// us data; once he does, forward it to the data
@@ -33,7 +33,7 @@ func handleConn(c net.Conn) {
 	//
 	// NOTE: an unbuffered channel or a channel of size
 	// one would work equally well here
-	data   := make(chan string, 1)
+	data := make(chan string, 1)
 	go func() {
 		for {
 			x := input.Scan()
@@ -54,8 +54,8 @@ func handleConn(c net.Conn) {
 		// Wait for one tick unless we receive something
 		// from the client on data
 		select {
-		case <- ticker.C:
-		case x, ok := <- data:
+		case <-ticker.C:
+		case x, ok := <-data:
 			// make sure to detect when the channel is closed
 			// (e.g. client sends EOF), for otherwise, we'd reset
 			// the countdown.
