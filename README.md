@@ -34,6 +34,8 @@ Solutions for *some* exercices of the [*The Go Programming Language*][gopl] book
     - 8.9
   - [ch8/depth-limited-crawler-with-cancel.go][gh-mb-gopl-ch8/depth-limited-crawler-with-cancel.go]:
     - 8.10
+  - [ch8/fetch.go][gh-mb-gopl-ch8/fetch.go]:
+    - 8.11
 
 **<u>Quick book review:</u>** The books feels great; in particular:
 
@@ -89,4 +91,6 @@ Eventually:
 [gh-mb-gopl-ch8/du.go]: https://github.com/mbivert/gopl/blob/master/ch8/du.go
 
 [gh-mb-gopl-ch8/depth-limited-crawler-with-cancel.go]: https://github.com/mbivert/gopl/blob/master/ch8/depth-limited-crawler-with-cancel.go
+
+[gh-mb-gopl-ch8/fetch.go]: https://github.com/mbivert/gopl/blob/master/ch8/fetch.go
 
