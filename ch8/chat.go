@@ -19,7 +19,7 @@ type client struct {
 var port = flag.String("p", ":8000", "listening port")
 
 // automatically disconnect clients after that much time of idling.
-var timeout = 3 * time.Second
+var timeout = 5 * time.Second
 
 var (
 	entering = make(chan client)
@@ -54,10 +54,15 @@ func broadcaster() {
 		case cli := <-leaving:
 			delete(clients, cli)
 			close(cli.ch)
-		// 8.13
-		case conn := <-timeouts:
-			conn.Close()
 		}
+	}
+}
+
+// separated from broadcaster so that we still
+// disconnect clients who don't provide their name fast enough.
+func timeouter() {
+	for conn := range timeouts {
+		conn.Close()
 	}
 }
 
@@ -69,9 +74,15 @@ func clientWriter(conn net.Conn, ch chan string) {
 
 func handleConn(conn net.Conn) {
 	ch := make(chan string)
-	name := conn.RemoteAddr().String()
 
-	cli := client{ch, name, time.NewTicker(timeout)}
+	// Set a temporary name & a corresponding client:
+	// we want the timeout goroutine below to be running
+	// even when user hasn't provided a name yet.
+	cli := client{
+		ch,
+		conn.RemoteAddr().String(),
+		time.NewTicker(timeout),
+	}
 
 	// 8.13
 	go func() {
@@ -87,20 +98,29 @@ func handleConn(conn net.Conn) {
 		cli.ticker.Stop()
 	}()
 
+	input := bufio.NewScanner(conn)
+	fmt.Fprintf(conn, "Enter your name: ")
+	ok := input.Scan()
+	if !ok {
+		conn.Close()
+		return
+	}
+	cli.ticker.Reset(timeout)
+	cli.name = input.Text()
+
 	go clientWriter(conn, ch)
 
-	ch <- "Connected as " + name
-	messages <- name + " has entered the chat"
+	ch <- "Connected as " + cli.name
+	messages <- cli.name + " has entered the chat"
 	entering <- cli
 
-	input := bufio.NewScanner(conn)
 	for input.Scan() {
-		messages <- name + ": " + input.Text()
+		messages <- cli.name + ": " + input.Text()
 		cli.ticker.Reset(timeout) // 8.13
 	}
 
 	leaving <- cli
-	messages <- name + " has left the chat"
+	messages <- cli.name + " has left the chat"
 
 	// Already closed on timeout
 	conn.Close()
@@ -113,6 +133,7 @@ func main() {
 	}
 
 	go broadcaster()
+	go timeouter()
 
 	for {
 		conn, err := ln.Accept()
