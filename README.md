@@ -36,6 +36,8 @@ Solutions for *some* exercices of the [*The Go Programming Language*][gopl] book
     - 8.10
   - [ch8/fetch.go][gh-mb-gopl-ch8/fetch.go]:
     - 8.11
+  - [ch8/fetch.go][gh-mb-gopl-ch8/chat.go]:
+    - 8.12
 
 **<u>Quick book review:</u>** The books feels great; in particular:
 
@@ -94,3 +96,4 @@ Eventually:
 
 [gh-mb-gopl-ch8/fetch.go]: https://github.com/mbivert/gopl/blob/master/ch8/fetch.go
 
+[gh-mb-gopl-ch8/chat.go]: https://github.com/mbivert/gopl/blob/master/ch8/chat.go
