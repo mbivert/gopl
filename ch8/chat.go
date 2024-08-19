@@ -19,7 +19,10 @@ type client struct {
 var port = flag.String("p", ":8000", "listening port")
 
 // automatically disconnect clients after that much time of idling.
-var timeout = 5 * time.Second
+var (
+	timeout    = 5 * time.Second
+	msgTimeout = 500 * time.Millisecond
+)
 
 var (
 	entering = make(chan client)
@@ -42,11 +45,35 @@ func lsClients(to client, clients map[client]bool) {
 func broadcaster() {
 	clients := make(map[client]bool)
 
+	// never stopped, but lifelong goroutine.
+	ticker := time.NewTicker(msgTimeout)
+
 	for {
 		select {
 		case msg := <-messages:
 			for cli := range clients {
-				cli.ch <- msg
+				ticker.Reset(msgTimeout)
+
+				// wait a little before giving up on sending
+				// this message to current client
+				//
+				// alternative solution is probably to use
+				// a ch := make(chan string, 5) in handleConn()
+				// so that we have room to buffer messages, and
+				// then here to
+				//
+				//	select {
+				//	case cli.ch <-msg:
+				//	default:
+				//	}
+				//
+				// aka, non-blocking send (if write unavailable,
+				// default is executed)
+				select {
+				case cli.ch <- msg:
+				case <-ticker.C:
+				}
+
 			}
 		case cli := <-entering:
 			clients[cli] = true
@@ -87,7 +114,7 @@ func handleConn(conn net.Conn) {
 	// 8.13
 	go func() {
 		select {
-		case <- cli.ticker.C:
+		case <-cli.ticker.C:
 			timeouts <- conn
 		}
 		// we'll get there, eventually. that is,
@@ -98,6 +125,7 @@ func handleConn(conn net.Conn) {
 		cli.ticker.Stop()
 	}()
 
+	// XXX we allow the same name to be used by different clients.
 	input := bufio.NewScanner(conn)
 	fmt.Fprintf(conn, "Enter your name: ")
 	ok := input.Scan()

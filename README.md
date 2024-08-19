@@ -40,6 +40,7 @@ Solutions for *some* exercices of the [*The Go Programming Language*][gopl] book
     - 8.12
     - 8.13
     - 8.14
+    - 8.15
 
 **<u>Quick book review:</u>** The books feels great; in particular:
 
