@@ -2,6 +2,12 @@
 
 Solutions for *some* exercices of the [*The Go Programming Language*][gopl] book:
 
+  - [ch2/popcount.go][gh-mb-gopl-ch2/popcount.go],
+  [ch2/popcount_test.go][gh-mb-gopl-ch2/popcount_test.go]
+  (benchmarks will be done later, in 11.6):
+    - 2.3
+    - 2.4
+    - 2.5
   - [ch6/intset.go][gh-mb-gopl-ch6/intset.go],
   [ch6/intset_test.go][gh-mb-gopl-ch6/intset_test.go]:
     - 6.1
@@ -41,7 +47,7 @@ Solutions for *some* exercices of the [*The Go Programming Language*][gopl] book
     - 8.13
     - 8.14
     - 8.15
-  - [ch9/bank1.go][gh-mb-gopl-ch9/bank1.go]
+  - [ch9/bank1.go][gh-mb-gopl-ch9/bank1.go]:
     - 9.1
 
 **<u>Quick book review:</u>** The books feels great; in particular:
@@ -69,6 +75,9 @@ Eventually:
 -->
 
 [gopl]: https://www.gopl.io/
+
+[gh-mb-gopl-ch2/popcount.go]: https://github.com/mbivert/gopl/blob/master/ch2/popcount.go
+[gh-mb-gopl-ch2/popcount_test.go]: https://github.com/mbivert/gopl/blob/master/ch2/popcount_test.go
 
 [gh-mb-gopl-ch6/intset.go]: https://github.com/mbivert/gopl/blob/master/ch6/intset.go
 [gh-mb-gopl-ch6/intset_test.go]: https://github.com/mbivert/gopl/blob/master/ch6/intset_test.go
