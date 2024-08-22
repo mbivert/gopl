@@ -56,6 +56,9 @@ Solutions for *some* exercices of the [*The Go Programming Language*][gopl] book
   - [ch9/maxgo.go][gh-mb-gopl-ch9/maxgo.go],
   [ch9/run-maxgo.sh][gh-mb-gopl-ch9/run-maxgo.sh]:
     - 9.4
+  - [ch9/pingpong.go][gh-mb-gopl-ch9/pingpong.go],
+  [ch9/run-pingpong.sh][gh-mb-gopl-ch9/run-pingpong.sh]:
+    - 9.5
 
 **<u>Quick book review:</u>** The books feels great; in particular:
 
@@ -128,3 +131,5 @@ Eventually:
 [gh-mb-gopl-ch9/maxgo.go]: https://github.com/mbivert/gopl/blob/master/ch9/maxgo.go
 [gh-mb-gopl-ch9/run-maxgo.sh]: https://github.com/mbivert/gopl/blob/master/ch9/run-maxgo.sh
 
+[gh-mb-gopl-ch9/pingpong.go]:  https://github.com/mbivert/gopl/blob/master/ch9/pingpong.go
+[gh-mb-gopl-ch9/run-pingpong.sh]: https://github.com/mbivert/gopl/blob/master/ch9/run-pingpong.sh

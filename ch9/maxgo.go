@@ -53,9 +53,9 @@ func launchGo(in, endp chan int) {
 		out = make(chan int)
 		go launchGo(out, endp)
 
-	// Last stage of the pipeline through which
-	// no value is going through: notify main that
-	// we can cancel everyone.
+		// Last stage of the pipeline through which
+		// no value is going through: notify main that
+		// we can cancel everyone.
 	} else if *nFlag {
 		endp <- -n
 		return
