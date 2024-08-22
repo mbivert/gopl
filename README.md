@@ -8,6 +8,10 @@ Solutions for *some* exercices of the [*The Go Programming Language*][gopl] book
     - 2.3
     - 2.4
     - 2.5
+  - [ch3/surface.go][gh-mb-gopl-ch3/surface.go]:
+    - 3.1
+    - 3.2 (a bit clumsy)
+    - 3.4
   - [ch6/intset.go][gh-mb-gopl-ch6/intset.go],
   [ch6/intset_test.go][gh-mb-gopl-ch6/intset_test.go]:
     - 6.1
@@ -77,6 +81,13 @@ but who lack on the engineering side.
 
 <!--
 
+3.3:
+	probably, compute the derivative to determine peeks & valleys;
+	not sure how to get the proportionality correct from there to grab
+	correct blue<->red gradients (isn't the derivative too local?)
+	Maybe there's a clever approach, e.g. from the deformation of the
+	polygons?
+
 Eventually:
 	7.4 / 7.5 : p194
 
@@ -88,6 +99,8 @@ Eventually:
 
 [gh-mb-gopl-ch2/popcount.go]: https://github.com/mbivert/gopl/blob/master/ch2/popcount.go
 [gh-mb-gopl-ch2/popcount_test.go]: https://github.com/mbivert/gopl/blob/master/ch2/popcount_test.go
+
+[gh-mb-gopl-ch3/surface.go]: https://github.com/mbivert/gopl/blob/master/ch3/surface.go
 
 [gh-mb-gopl-ch6/intset.go]: https://github.com/mbivert/gopl/blob/master/ch6/intset.go
 [gh-mb-gopl-ch6/intset_test.go]: https://github.com/mbivert/gopl/blob/master/ch6/intset_test.go
