@@ -51,6 +51,8 @@ Solutions for *some* exercices of the [*The Go Programming Language*][gopl] book
     - 9.1
   - [ch9/popcount.go][gh-mb-gopl-ch9/popcount.go]:
     - 9.2
+  - [ch9/memo.go][gh-mb-gopl-ch9/memo.go] **UNTESTED / WIP**:
+    - 9.3
 
 **<u>Quick book review:</u>** The books feels great; in particular:
 
@@ -117,3 +119,6 @@ Eventually:
 [gh-mb-gopl-ch9/bank1.go]: https://github.com/mbivert/gopl/blob/master/ch9/bank1.go
 
 [gh-mb-gopl-ch9/popcount.go]: https://github.com/mbivert/gopl/blob/master/ch9/popcount.go
+
+[gh-mb-gopl-ch9/memo.go]: https://github.com/mbivert/gopl/blob/master/ch9/memo.go
+
