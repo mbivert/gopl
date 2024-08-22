@@ -53,6 +53,9 @@ Solutions for *some* exercices of the [*The Go Programming Language*][gopl] book
     - 9.2
   - [ch9/memo.go][gh-mb-gopl-ch9/memo.go] **UNTESTED / WIP**:
     - 9.3
+  - [ch9/maxgo.go][gh-mb-gopl-ch9/maxgo.go],
+  [ch9/run-maxgo.sh][gh-mb-gopl-ch9/run-maxgo.sh]:
+    - 9.4
 
 **<u>Quick book review:</u>** The books feels great; in particular:
 
@@ -121,4 +124,7 @@ Eventually:
 [gh-mb-gopl-ch9/popcount.go]: https://github.com/mbivert/gopl/blob/master/ch9/popcount.go
 
 [gh-mb-gopl-ch9/memo.go]: https://github.com/mbivert/gopl/blob/master/ch9/memo.go
+
+[gh-mb-gopl-ch9/maxgo.go]: https://github.com/mbivert/gopl/blob/master/ch9/maxgo.go
+[gh-mb-gopl-ch9/run-maxgo.sh]: https://github.com/mbivert/gopl/blob/master/ch9/run-maxgo.sh
 
