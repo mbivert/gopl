@@ -14,6 +14,7 @@ Solutions for *some* exercices of the [*The Go Programming Language*][gopl] book
     - 3.4
   - [ch3/mandelbrot.go][gh-mb-gopl-ch3/mandelbrot.go]:
     - 3.5
+    - 3.6
   - [ch6/intset.go][gh-mb-gopl-ch6/intset.go],
   [ch6/intset_test.go][gh-mb-gopl-ch6/intset_test.go]:
     - 6.1

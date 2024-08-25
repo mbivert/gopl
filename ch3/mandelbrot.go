@@ -2,6 +2,7 @@
 package main
 
 import (
+	"flag"
 	"image"
 	"image/color"
 	"image/png"
@@ -9,7 +10,16 @@ import (
 	"os"
 )
 
+var (
+	// 0.5 or 1 are way too much; the improvements are;
+	// set to zero to disable supersampling.
+	δx = flag.Float64("dx", 0.001, "supersampling δx")
+	δy = flag.Float64("dy", 0.001, "supersampling δy")
+)
+
 func main() {
+	flag.Parse()
+
 	const (
 		xmin, ymin, xmax, ymax = -2, -2, +2, +2
 		width, height          = 1024, 1024
@@ -18,17 +28,42 @@ func main() {
 	img := image.NewRGBA(image.Rect(0, 0, width, height))
 
 	for py := 0; py < height; py++ {
-		y := float64(py)/height*(ymax-ymin) + ymin
-		for px := 0; px < width; px++ {
+		y1 := (float64(py)+*δx)/height*(ymax-ymin) + ymin
+		y2 := (float64(py)-*δy)/height*(ymax-ymin) + ymin
 
-			x := float64(px)/width*(xmax-xmin) + xmin
-			z := complex(x, y)
+		for px := 0; px < width; px++ {
+			x1 := (float64(px)+*δx)/width*(xmax-xmin) + xmin
+			x2 := (float64(px)-*δy)/width*(xmax-xmin) + xmin
+
+			z1 := complex(x1, y1)
+			z2 := complex(x1, y2)
+			z3 := complex(x2, y1)
+			z4 := complex(x2, y2)
+
+			m := avg(mandelbrot(z1), mandelbrot(z2), mandelbrot(z3), mandelbrot(z4))
+
 			// Image point (px, py) represents complex value z.
-			img.Set(px, py, mandelbrot(z))
+			img.Set(px, py, m)
 		}
 	}
 
 	png.Encode(os.Stdout, img) // NOTE: ignoring errors
+}
+
+func avg(x, y, z, t color.Color) color.Color {
+	// uint32 should be enough, but as the extra space is somewhat
+	// "reserved" already (could be used), let's get bigger.
+	var r, g, b, a uint64
+
+	for _, u := range []color.Color{x, y, z, t} {
+		ru, gu, bu, au := u.RGBA()
+		r += uint64(ru)
+		g += uint64(gu)
+		b += uint64(bu)
+		a += uint64(au)
+	}
+
+	return color.RGBA{uint8(r / 4), uint8(g / 4), uint8(b / 4), uint8(a / 4)}
 }
 
 func mandelbrot(z complex128) color.Color {
