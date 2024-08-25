@@ -12,6 +12,8 @@ Solutions for *some* exercices of the [*The Go Programming Language*][gopl] book
     - 3.1
     - 3.2 (a bit clumsy)
     - 3.4
+  - [ch3/mandelbrot.go][gh-mb-gopl-ch3/mandelbrot.go]:
+    - 3.5
   - [ch6/intset.go][gh-mb-gopl-ch6/intset.go],
   [ch6/intset_test.go][gh-mb-gopl-ch6/intset_test.go]:
     - 6.1
@@ -101,6 +103,8 @@ Eventually:
 [gh-mb-gopl-ch2/popcount_test.go]: https://github.com/mbivert/gopl/blob/master/ch2/popcount_test.go
 
 [gh-mb-gopl-ch3/surface.go]: https://github.com/mbivert/gopl/blob/master/ch3/surface.go
+
+[gh-mb-gopl-ch3/mandelbrot.go]: https://github.com/mbivert/gopl/blob/master/ch3/mandelbrot.go
 
 [gh-mb-gopl-ch6/intset.go]: https://github.com/mbivert/gopl/blob/master/ch6/intset.go
 [gh-mb-gopl-ch6/intset_test.go]: https://github.com/mbivert/gopl/blob/master/ch6/intset_test.go
