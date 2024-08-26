@@ -59,7 +59,7 @@ package main
 	16384  16384  15000  51.502851775s
 	16384  16384  20000  38.679373ms      # surprisingly fast
 	16384  16384  30000  28.704541699s
- */
+*/
 
 import (
 	"flag"
@@ -88,7 +88,7 @@ const (
 
 type Data struct {
 	y1, y2 float64
-	py int
+	py     int
 }
 
 func computeAndSet(img *image.RGBA, c <-chan *Data) {
