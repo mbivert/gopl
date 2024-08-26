@@ -71,6 +71,8 @@ Solutions for *some* exercices of the [*The Go Programming Language*][gopl] book
   - [ch9/pingpong.go][gh-mb-gopl-ch9/pingpong.go],
   [ch9/run-pingpong.sh][gh-mb-gopl-ch9/run-pingpong.sh]:
     - 9.5
+  - [ch9/run-parallel-mandelbrot.sh][gh-mb-gopl-ch9/run-parallel-mandelbrot.sh]:
+    - 9.6
 
 **<u>Quick book review:</u>** The books feels great; in particular:
 
@@ -167,3 +169,6 @@ Eventually:
 
 [gh-mb-gopl-ch9/pingpong.go]:  https://github.com/mbivert/gopl/blob/master/ch9/pingpong.go
 [gh-mb-gopl-ch9/run-pingpong.sh]: https://github.com/mbivert/gopl/blob/master/ch9/run-pingpong.sh
+
+[gh-mb-gopl-ch9/run-parallel-mandelbrot.sh]: https://github.com/mbivert/gopl/blob/master/ch9/run-parallel-mandelbrot.sh
+
