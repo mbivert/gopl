@@ -11,7 +11,7 @@ import (
 )
 
 var (
-	// 0.5 or 1 are way too much; the improvements are;
+	// 0.5 or 1 are way too much;
 	// set to zero to disable supersampling.
 	δx = flag.Float64("dx", 0.001, "supersampling δx")
 	δy = flag.Float64("dy", 0.001, "supersampling δy")

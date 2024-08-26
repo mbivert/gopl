@@ -39,6 +39,9 @@ Solutions for *some* exercices of the [*The Go Programming Language*][gopl] book
     - 8.3
   - [ch8/reverb2.go][gh-mb-gopl-ch8/reverb2.go]:
     - 8.4
+  - [ch8/parallel-mandelbrot.go][gh-mb-gopl-ch8/parallel-mandelbrot.go],
+  [ch8/run-parallel-mandelbrot.sh][gh-mb-gopl-ch8/run-parallel-mandelbrot.sh]:
+    - 8.5
   - [ch8/depth-limited-crawler.go][gh-mb-gopl-ch8/depth-limited-crawler.go]:
     - 8.6
   - [ch8/mirror.go][gh-mb-gopl-ch8/mirror.go]:
@@ -93,6 +96,12 @@ but who lack on the engineering side.
 	Maybe there's a clever approach, e.g. from the deformation of the
 	polygons?
 
+3.8
+	numerical work with benchmark, p82
+
+3.9
+	easy
+
 Eventually:
 	7.4 / 7.5 : p194
 
@@ -129,6 +138,9 @@ Eventually:
 [gh-mb-gopl-ch8/reverb1.go]: https://github.com/mbivert/gopl/blob/master/ch8/reverb1.go
 
 [gh-mb-gopl-ch8/reverb2.go]: https://github.com/mbivert/gopl/blob/master/ch8/reverb2.go
+
+[gh-mb-gopl-ch8/parallel-mandelbrot.go]: https://github.com/mbivert/gopl/blob/master/ch8/parallel-mandelbrot.go
+[gh-mb-gopl-ch8/run-parallel-mandelbrot.sh]: https://github.com/mbivert/gopl/blob/master/ch8/run-parallel-mandelbrot.sh
 
 [gh-mb-gopl-ch8/depth-limited-crawler.go]: https://github.com/mbivert/gopl/blob/master/ch8/depth-limited-crawler.go
 
