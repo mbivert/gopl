@@ -158,4 +158,3 @@ func main() {
 	c = Cycle{42, &c}
 	Display("c", c)
 }
-

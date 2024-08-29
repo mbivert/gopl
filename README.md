@@ -78,6 +78,8 @@ Solutions for *some* exercices of the [*The Go Programming Language*][gopl] book
   - [ch12/display.go][gh-mb-gopl-ch12/display.go]:
     - 12.1
     - 12.2
+  - [ch12/sexp.go][gh-mb-gopl-ch12/sexp.go]:
+    - 12.3
 
 **<u>Quick book review:</u>** The books feels great; in particular:
 
@@ -203,3 +205,6 @@ Eventually:
 [gh-mb-gopl-ch10/jpeg.go]: https://github.com/mbivert/gopl/blob/master/ch10/jpeg.go
 
 [gh-mb-gopl-ch12/display.go]: https://github.com/mbivert/gopl/blob/master/ch12/display.go
+
+[gh-mb-gopl-ch12/sexp.go]: https://github.com/mbivert/gopl/blob/master/ch12/sexp.go
+
