@@ -75,6 +75,7 @@ Solutions for *some* exercices of the [*The Go Programming Language*][gopl] book
     - 9.6
   - [ch10/jpeg.go][gh-mb-gopl-ch10/jpeg.go]:
     - 10.1
+  - [ch12/display.go][gh-mb-gopl-ch12/display.go]:
 
 **<u>Quick book review:</u>** The books feels great; in particular:
 
@@ -111,6 +112,30 @@ Eventually:
 
 	p204: subtle bits regarding interfaces containing a nil pointer;
 	would be nice to clarify all those things with proper "memory diagrams".
+
+10.2 (p307) easy
+
+10.3 p312
+
+10.4 p319
+
+11.1, 11.2 p326, writing tests
+11.3, 11.4 p327 again, just about writing tests
+11.5 p336 more tests
+
+11.6 11.7 benchmarks, for resp. 2.4/2.5 and 6.1 to 6.5 (IntSet)
+	(todo)
+
+12.2 p357
+12.3 -> 12.7 p360
+12.8 12.9 12.10 p366
+12.11 12.12 12.13 p369/370
+	reflections; at least some of them
+
+13.1 13.2 p380 unsafe
+
+13.3 13.4 p385: theoretically still unsafe
+
 -->
 
 [gopl]: https://www.gopl.io/
@@ -176,3 +201,4 @@ Eventually:
 
 [gh-mb-gopl-ch10/jpeg.go]: https://github.com/mbivert/gopl/blob/master/ch10/jpeg.go
 
+[gh-mb-gopl-ch12/display.go]: https://github.com/mbivert/gopl/blob/master/ch12/display.go
