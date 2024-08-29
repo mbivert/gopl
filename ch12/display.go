@@ -6,13 +6,15 @@ import (
 	"strconv"
 )
 
+const maxDepth = 42
+
 func Display(name string, x interface{}) {
 	fmt.Printf("Display %s (%T):\n", name, x)
-	fmt.Printf(display(name, reflect.ValueOf(x), ""))
+	fmt.Printf(display(name, reflect.ValueOf(x), "", 0))
 }
 
 // formatAtom formats a value without inspecting its internal structure.
-func formatAtom(v reflect.Value, indent string) string {
+func formatAtom(v reflect.Value, indent string, depth int) string {
 	switch v.Kind() {
 	case reflect.Invalid:
 		return "invalid"
@@ -33,56 +35,60 @@ func formatAtom(v reflect.Value, indent string) string {
 	case reflect.Struct:
 		fallthrough
 	case reflect.Array:
-		return display(v.Type().String(), v, indent+"\t")
+		return display(v.Type().String(), v, indent+"\t", depth+1)
 	default: // reflect.Interface
 		return v.Type().String() + " value"
 	}
 }
 
-func display(path string, v reflect.Value, indent string) string {
+func display(path string, v reflect.Value, indent string, depth int) string {
+	if depth >= maxDepth {
+		return "...\n"
+	}
+
 	switch v.Kind() {
 	case reflect.Invalid:
 		return fmt.Sprintf("%s%s = invalid\n", path, indent)
 	case reflect.Slice, reflect.Array:
 		s := ""
 		for i := 0; i < v.Len(); i++ {
-			s += display(fmt.Sprintf("%s%s[%d]", indent, path, i), v.Index(i), indent)
+			s += display(fmt.Sprintf("%s%s[%d]", indent, path, i), v.Index(i), indent, depth+1)
 		}
 		return s
 	case reflect.Struct:
 		s := ""
 		for i := 0; i < v.NumField(); i++ {
 			fieldPath := fmt.Sprintf("%s%s.%s", indent, path, v.Type().Field(i).Name)
-			s += display(fieldPath, v.Field(i), indent)
+			s += display(fieldPath, v.Field(i), indent, depth+1)
 		}
 		return s
 	case reflect.Map:
 		s := ""
 		for _, key := range v.MapKeys() {
 			// meh
-			depth := ""
+			nl := ""
 			if key.Kind() == reflect.Struct || key.Kind() == reflect.Array {
-				depth = "\n"
+				nl = "\n"
 			}
-			s += display(fmt.Sprintf("%s%s[%s%s]", indent, path, depth,
-				formatAtom(key, indent)), v.MapIndex(key), indent)
+			s += display(fmt.Sprintf("%s%s[%s%s]", indent, path, nl,
+				formatAtom(key, indent, depth)), v.MapIndex(key), indent, depth+1)
 		}
 		return s
 	case reflect.Ptr:
 		if v.IsNil() {
 			return fmt.Sprintf("%s%s = nil\n", indent, path)
 		} else {
-			return display(fmt.Sprintf("%s(*%s)", indent, path), v.Elem(), indent)
+			return display(fmt.Sprintf("%s(*%s)", indent, path), v.Elem(), indent, depth+1)
 		}
 	case reflect.Interface:
 		if v.IsNil() {
 			return fmt.Sprintf("%s%s = nil\n", indent, path)
 		} else {
 			s := fmt.Sprintf("%s%s.type = %s\n", indent, path, v.Elem().Type())
-			return s + display(path+".value", v.Elem(), indent)
+			return s + display(path+".value", v.Elem(), indent, depth+1)
 		}
 	default: // basic types, channels, funcs
-		return fmt.Sprintf("%s%s = %s\n", indent, path, formatAtom(v, indent))
+		return fmt.Sprintf("%s%s = %s\n", indent, path, formatAtom(v, indent, depth))
 	}
 }
 
@@ -121,6 +127,12 @@ type Person struct {
 	Age  int
 }
 
+// a struct that points to itself
+type Cycle struct {
+	Value int
+	Tail  *Cycle
+}
+
 // We can't recycle Movie here, as struct{} may only
 // be used as key when they are comparable, i.e. its
 // fields must be "scalar" types or comparable structs
@@ -142,4 +154,8 @@ func main() {
 	Display("strangelove", strangelove)
 	Display("known", known)
 	Display("sums", sums)
+	var c Cycle
+	c = Cycle{42, &c}
+	Display("c", c)
 }
+

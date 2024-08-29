@@ -76,6 +76,8 @@ Solutions for *some* exercices of the [*The Go Programming Language*][gopl] book
   - [ch10/jpeg.go][gh-mb-gopl-ch10/jpeg.go]:
     - 10.1
   - [ch12/display.go][gh-mb-gopl-ch12/display.go]:
+    - 12.1
+    - 12.2
 
 **<u>Quick book review:</u>** The books feels great; in particular:
 
@@ -126,7 +128,6 @@ Eventually:
 11.6 11.7 benchmarks, for resp. 2.4/2.5 and 6.1 to 6.5 (IntSet)
 	(todo)
 
-12.2 p357
 12.3 -> 12.7 p360
 12.8 12.9 12.10 p366
 12.11 12.12 12.13 p369/370
