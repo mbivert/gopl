@@ -81,6 +81,9 @@ Solutions for *some* exercices of the [*The Go Programming Language*][gopl] book
   - [ch12/sexp.go][gh-mb-gopl-ch12/sexp.go]:
     - 12.3
     - 12.4
+  - [ch12/json.go][gh-mb-gopl-ch12/json.go],
+  [ch12/json_test.go][gh-mb-gopl-ch12/json_test.go]:
+    - 12.5
 
 **<u>Quick book review:</u>** The books feels great; in particular:
 
@@ -209,3 +212,5 @@ Eventually:
 
 [gh-mb-gopl-ch12/sexp.go]: https://github.com/mbivert/gopl/blob/master/ch12/sexp.go
 
+[gh-mb-gopl-ch12/json.go]: https://github.com/mbivert/gopl/blob/master/ch12/json.go
+[gh-mb-gopl-ch12/json_test.go]: https://github.com/mbivert/gopl/blob/master/ch12/json_test.go

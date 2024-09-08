@@ -98,6 +98,9 @@ func encode(buf *bytes.Buffer, v reflect.Value) error {
 		}
 		buf.WriteByte(')')
 
+	case reflect.UnsafePointer:
+		fmt.Fprintf(buf, "%p", v.UnsafePointer())
+
 	default: // chan, func
 		return fmt.Errorf("unsupported type: %s", v.Type())
 
