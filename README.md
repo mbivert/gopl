@@ -80,6 +80,7 @@ Solutions for *some* exercices of the [*The Go Programming Language*][gopl] book
     - 12.2
   - [ch12/sexp.go][gh-mb-gopl-ch12/sexp.go]:
     - 12.3
+    - 12.4
 
 **<u>Quick book review:</u>** The books feels great; in particular:
 
