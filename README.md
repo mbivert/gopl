@@ -82,6 +82,7 @@ Solutions for *some* exercices of the [*The Go Programming Language*][gopl] book
     - 12.3
     - 12.4
     - 12.6
+    - 12.7
   - [ch12/json.go][gh-mb-gopl-ch12/json.go],
   [ch12/json_test.go][gh-mb-gopl-ch12/json_test.go]:
     - 12.5
@@ -135,7 +136,6 @@ Eventually:
 11.6 11.7 benchmarks, for resp. 2.4/2.5 and 6.1 to 6.5 (IntSet)
 	(todo)
 
-12.3 -> 12.7 p360
 12.8 12.9 12.10 p366
 12.11 12.12 12.13 p369/370
 	reflections; at least some of them

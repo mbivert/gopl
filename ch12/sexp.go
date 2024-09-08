@@ -323,6 +323,61 @@ func Marshal(v interface{}) ([]byte, error) {
 	return buf.Bytes(), nil
 }
 
+type Encoder struct {
+	w io.Writer
+	escape bool // not implemented
+	prefix, indent string
+}
+
+func NewEncoder(w io.Writer) *Encoder {
+	return &Encoder{
+		w,
+		true,
+		"",
+		"",
+	}
+}
+
+// This is really rough, but should be still fit what's
+// expected for this exercise anyway:
+//
+//	1. we probably would want prettyPrint/encode to take
+//	an io.Writer instead of a bytes.Buffer
+//
+//	2. prettyPrint doesn't manage prefix, and probably doesn't
+//	correctly handle indent so well either
+//
+//	3. HTML escaping is unmanaged.
+//
+//	4. Eventually, we may need/want a separate Indent function
+//	instead of prettyPrint: json/encoding implements and
+//	performs indentation in a separate step systematically.
+func (enc *Encoder) Encode(v any) error {
+	var err error
+	var buf bytes.Buffer
+
+	if enc.prefix != "" || enc.indent != "" {
+		if err = prettyPrint(&buf, reflect.ValueOf(v), enc.indent); err != nil {
+			return err
+		}
+	} else {
+		if err := encode(&buf, reflect.ValueOf(v)); err != nil {
+			return err
+		}
+	}
+	_, err = buf.WriteTo(enc.w)
+	return err
+}
+
+func (enc *Encoder) SetEscapeHTML(on bool) {
+	enc.escape = on
+}
+
+func (enc *Encoder) SetIndent(prefix, indent string) {
+	enc.prefix = prefix
+	enc.indent = indent
+}
+
 type Movie struct {
 	Title, Subtitle string
 	Year            int
@@ -367,4 +422,9 @@ func main() {
 		log.Fatal(erry)
 	}
 	fmt.Println(string(ys))
+
+	enc := NewEncoder(os.Stdout)
+	enc.SetIndent("unused-prefix", "") // triggers prettyPrint
+	enc.Encode(strangelove)
+	enc.Encode(strangelove)
 }
