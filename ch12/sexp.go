@@ -108,6 +108,88 @@ func encode(buf *bytes.Buffer, v reflect.Value) error {
 	return nil
 }
 
+// Note that
+//	v.Field(i) == reflect.Zero(v.Field(i).Type())
+// and
+//	reflect.DeepEqual(v.Field(i), reflect.Zero(v.Field(i).Type()))
+// will fail. Doc states:
+// « To compare two Values, compare the results of the Interface method.
+// Using == on two Values does not compare the underlying values they
+// represent. »
+//
+// However, .Interface() returns false for unexported fields
+// (and panic if CanInterface() doesn't guard it:
+//	panic: reflect.Value.Interface: cannot return value obtained from
+//	unexported field or method)
+//
+// So, isZeroBasic() only works for public fields ...
+func isZeroBasic(v reflect.Value) bool {
+	zero := reflect.Zero(v.Type())
+
+	if v.CanInterface() && zero.CanInterface() {
+		if v.Comparable() && zero.Comparable() {
+			if v.Interface() == zero.Interface() {
+				// comment/uncomment to verify
+				return true
+			}
+		}
+	}
+
+	return false
+}
+
+// ... but since we know (we're doing this already!) we can print
+// private fields, we can perform a more  tedious test to get
+// a more accurate version
+//
+// Seems that another option is to rely on unsafe
+// (https://stackoverflow.com/a/17982725), but the authors will
+// only present unsafe later in the book.
+func isZeroBetter(v reflect.Value) bool {
+	zero := reflect.Zero(v.Type())
+
+	switch v.Kind() {
+	case reflect.Bool:
+		return v.Bool() == zero.Bool()
+
+	case reflect.Int, reflect.Int8, reflect.Int16,
+		reflect.Int32, reflect.Int64:
+		return v.Int() == zero.Int()
+
+	case reflect.Uint, reflect.Uint8, reflect.Uint16,
+		reflect.Uint32, reflect.Uint64, reflect.Uintptr:
+		return v.Uint() == zero.Uint()
+
+	case reflect.Float32, reflect.Float64:
+		return v.Float() == zero.Float()
+
+	case reflect.Complex64, reflect.Complex128:
+		return v.Complex() == zero.Complex()
+
+	case reflect.String:
+		return v.String() == zero.String()
+
+	case reflect.Array:
+		return v.Len() == 0 // ??
+	case reflect.Slice, reflect.Ptr, reflect.UnsafePointer:
+		return v.IsNil()
+//	case reflect.Struct: // hmm.
+	}
+
+	return false
+}
+
+// But this seems to be the real deal anyway; it even deals with
+// nil struct, as demonstrated by the printed os.File
+func isReallyZero(v reflect.Value) bool {
+	if v.IsValid() {
+		return v.IsZero()
+	}
+	return false
+}
+
+var isZero = isReallyZero
+
 func prettyPrint(buf *bytes.Buffer, v reflect.Value, indent string) error {
 	switch v.Kind() {
 	case reflect.Invalid:
@@ -155,10 +237,16 @@ func prettyPrint(buf *bytes.Buffer, v reflect.Value, indent string) error {
 
 	case reflect.Struct: // ((name value) ...)
 		buf.WriteString("(")
+		n := 0
 		for i := 0; i < v.NumField(); i++ {
-			if i > 0 {
+			if isZero(v.Field(i)) {
+				continue
+			}
+
+			if n > 0 {
 				buf.WriteString("\n"+indent+" ")
 			}
+			n++
 			fmt.Fprintf(buf, "(%s ", v.Type().Field(i).Name)
 			ind := indent+" "
 			for n := 0; n < len(v.Type().Field(i).Name); n++ {
@@ -173,12 +261,15 @@ func prettyPrint(buf *bytes.Buffer, v reflect.Value, indent string) error {
 
 	case reflect.Map: // ((key value) ...)
 		buf.WriteByte('(')
-		for i, key := range v.MapKeys() {
-
-			if i > 0 {
-				buf.WriteString("\n"+indent+" ")
-
+		n := 0
+		for _, key := range v.MapKeys() {
+			if isZero(v.MapIndex(key)) {
+				continue
 			}
+			if n > 0 {
+				buf.WriteString("\n"+indent+" ")
+			}
+			n++
 			buf.WriteByte('(')
 			if err := prettyPrint(buf, key, indent); err != nil {
 				return err
@@ -256,6 +347,7 @@ var strangelove = Movie{
 		"Gen. Buck Turgidson":        "George C. Scott",
 		"Brig. Gen. Jack D. Ripper":  "Sterling Hayden",
 		`Maj. T.J. "King" Kong`:      "Slim Pickens",
+		"foo":                         "",
 	},
 	Oscars: []string{
 		"Best Actor (Nomin.)",
@@ -270,9 +362,9 @@ var strangelove = Movie{
 }
 
 func main() {
-	xs, err := ppMarshal(strangelove)
-	if err != nil {
-		log.Fatal(err)
+	ys, erry := ppMarshal(strangelove)
+	if erry != nil {
+		log.Fatal(erry)
 	}
-	fmt.Println(string(xs))
+	fmt.Println(string(ys))
 }

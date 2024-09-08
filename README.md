@@ -81,6 +81,7 @@ Solutions for *some* exercices of the [*The Go Programming Language*][gopl] book
   - [ch12/sexp.go][gh-mb-gopl-ch12/sexp.go]:
     - 12.3
     - 12.4
+    - 12.6
   - [ch12/json.go][gh-mb-gopl-ch12/json.go],
   [ch12/json_test.go][gh-mb-gopl-ch12/json_test.go]:
     - 12.5
